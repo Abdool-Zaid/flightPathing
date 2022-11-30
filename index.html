@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
     </style>
     <center>
-    <input type="number">
-        <div id="mainfunc" onclick="mainFunc()">run function</div>
-        <div id="target" ></div>
+      <input type="number" />
+      <div id="mainfunc" onclick="mainFunc()">run function</div>
+      <div id="target"></div>
     </center>
-<script>
-          function generateRandomColor() {
+    <script>
+      function generateRandomColor() {
         let letters = "0123456789ABCDEF";
         let color = "#";
         for (let i = 0; i < 6; i++) {
@@ -29,47 +28,68 @@
         }
         return color;
       }
-      let coor ={
-        x:0,
-        y:0,
-        flightPath:[]
-      }
-window.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-   mainFunc()
-    }
-});
-      let  mainFunc=()=>{
-        let flightDuration=document.querySelector('input').value
-if ('forward') {
-    
-    coor.y++
-    flightDuration--
-    mainFunc()
-} else if('backwards') {
-    
-    coor.y--
-    flightDuration--
-    mainFunc()
-}
-else if('left') {
-    
-    coor.x++
-    flightDuration--
-    mainFunc()
-}
-else if('right') {
-    
-    coor.x--
-    flightDuration--
-    mainFunc()
-}
- else if(('stop')||(flightDuration==0)) {
-    
-    mainFunc()
-}
-}
-</script>
+      let coor = {
+        x: 0,
+        y: 0,
+        flightPath: [],
+      };
+      window.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          mainFunc();
+        }
+      });
 
-</body>
+      let flightDuration;
+      let u = true;
+      let mainFunc = () => {
+        if (u == true) {
+          u = false;
+          flightDuration = document.querySelector("input").value;
+          console.log(flightDuration);
+        }
+        // forward
+        if (flightDuration > 0 && (coor.flightPath[coor.flightPath.length-1]=='right'|| coor.flightPath[coor.flightPath.length-1]== undefined)) {
+          coor.y++;
+          flightDuration--;
+          coor.flightPath.push('forward')
+          mainFunc();
+        }
+        // backwards
+        else if(flightDuration > 0 && (coor.flightPath[coor.flightPath.length-1]=='left')) {
+            
+            coor.y--
+            flightDuration--
+            coor.flightPath.push('backwards')
+            mainFunc()
+        }
+        // left
+        else if(flightDuration > 0 && (coor.flightPath[coor.flightPath.length-1]=='forward')) {
+            
+            coor.x++
+            flightDuration--
+            coor.flightPath.push('left')
+            mainFunc()
+        }
+        // right
+        else if(flightDuration > 0 && (coor.flightPath[coor.flightPath.length-1]=='backwards')) {
+            
+            coor.x--
+            flightDuration--
+            coor.flightPath.push('right')
+            mainFunc()
+        }
+        else {
+            u = true;
+          flightDuration = "mlem";
+          let Alert = () => {
+            return `
+    X: ${coor.x}
+    y: ${coor.y}
+    `;
+          };
+          console.log(Alert());
+        }
+      };
+    </script>
+  </body>
 </html>
