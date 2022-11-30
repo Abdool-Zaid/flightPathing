@@ -42,6 +42,9 @@
       let flightDuration;
       let u = true;
       let mainFunc = () => {
+        try {
+            
+        
         if (u == true) {
           u = false;
           flightDuration = document.querySelector("input").value;
@@ -89,6 +92,9 @@
           };
           console.log(Alert());
         }
+    } catch (error) {
+window.location.reload()
+    }
       };
     </script>
   </body>

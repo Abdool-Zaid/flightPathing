@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #target{
+            display: none;
+        }
+    </style>
+    <input type="text" name="key" id="key">
+    <input type="text" name="value" id="value">
+<div id="button" onclick="mainFunc()">run function</div>
+<div id="target"></div>
+<script>
+       window.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          mainFunc();
+        }
+      });
+      let person={}
+      let pTemp
+let key=()=>document.querySelector('#key').value
+let value=()=>document.querySelector('#value').value
+let tempArr=[]
+let target= document.querySelector('#target')
+let mainFunc=()=>{
+tempArr.push({
+    key:key(),
+    value:value(),
+})
+let keytTemp=tempArr[tempArr.length-1].key
+let valuetTemp=tempArr[tempArr.length-1].value
+if (target.innerHTML==''){
+    target.innerHTML+=`
+    "${keytTemp}":"${valuetTemp}"
+    `
+}
+else{
+    target.innerHTML+=`
+    ,"${keytTemp}":"${valuetTemp}"
+    `
+}
+document.querySelector('#key').value=''
+document.querySelector('#value').value=''
+let str= `{${target.innerHTML}}`
+person=JSON.parse(str)
+console.log(person)
+
+}
+</script>
+</body>
+</html>
